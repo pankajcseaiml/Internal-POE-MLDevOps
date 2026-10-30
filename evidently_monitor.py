@@ -86,3 +86,4 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         report_file = sys.argv[1]
     run_evidently_monitoring(report_file)
+

@@ -80,8 +80,9 @@ git push -u origin main
 1. Jenkins is installed on Windows at `C:\Program Files\Jenkins` and runs as a Windows Service (`Jenkins`).
 2. Jenkins web console is accessible at:
    ```text
-   http://localhost:8080
+   http://localhost:8081
    ```
+   *(Note: Port 8081 is configured because Port 8080 is used by Steam web helper on this machine).*
 3. Default Jenkins Home: `C:\ProgramData\Jenkins\.jenkins`
 4. Plugins configured:
    - **Git Plugin** (`hudson.plugins.git.GitTool`)
@@ -92,7 +93,7 @@ git push -u origin main
 
 ### Step 6: Pull the Code from GitHub in Jenkins
 In Jenkins, configure a new Pipeline or Freestyle job:
-1. Open Jenkins Dashboard (`http://localhost:8080`).
+1. Open Jenkins Dashboard (`http://localhost:8081`).
 2. Click **New Item** -> Name: `Internal-POE-MLDevOps` -> Select **Pipeline** -> Click **OK**.
 3. Under **Pipeline** definition, select **Pipeline script from SCM**:
    - **SCM**: Git
@@ -208,3 +209,4 @@ python evidently_monitor.py
 ==================================================
 ```
 The resulting `evidently_report.html` can be opened directly in any browser for interactive visual inspection of feature drift and data quality metrics.
+
