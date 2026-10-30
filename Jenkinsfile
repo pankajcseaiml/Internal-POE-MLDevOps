@@ -2,15 +2,15 @@ pipeline {
     agent any
 
     environment {
-        PATH = "C:\\Users\\Pankaj\\AppData\\Local\\Programs\\Python\\Python313;C:\\Users\\Pankaj\\AppData\\Local\\Programs\\Python\\Python313\\Scripts;${env.PATH}"
+        PATH = "C:\\Users\\Pankaj\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;C:\\Users\\Pankaj\\AppData\\Local\\Programs\\Python\\Python313;C:\\Users\\Pankaj\\AppData\\Local\\Programs\\Python\\Python313\\Scripts;${env.PATH}"
         PYTHONPATH = "C:\\Users\\Pankaj\\AppData\\Roaming\\Python\\Python313\\site-packages"
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                echo 'Pulling code from GitHub repository...'
-                checkout scm
+                echo 'Pulling code from GitHub repository: https://github.com/pankajcseaiml/Internal-POE-MLDevOps'
+                git branch: 'main', url: 'https://github.com/pankajcseaiml/Internal-POE-MLDevOps.git'
             }
         }
 
@@ -35,7 +35,7 @@ pipeline {
             }
         }
 
-        stage('Docker Build and Run (Optional)') {
+        stage('Docker Build and Run') {
             steps {
                 script {
                     echo 'Building and running lightweight Python Docker image...'
