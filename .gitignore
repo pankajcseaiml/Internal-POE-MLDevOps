@@ -1,19 +1,31 @@
-# Byte-compiled / optimized / DLL files
+# Python bytecode & cache
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
 
-# Pytest & virtual environments
+# Pytest & testing artifacts
 .pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
 venv/
 env/
 .env
 
-# Evidently generated reports (optional to keep git clean)
-evidently_report.html
+# Monitoring & HTML generated reports
+*.html
+*.log
 
-# IDE files
+# Windows & OS temporary files
+*.reg
+*.tmp
+*.bak
+Thumbs.db
+Desktop.ini
+
+# VS Code (preserve launch and settings, ignore state)
 .vscode/*
 !.vscode/settings.json
 !.vscode/launch.json
-

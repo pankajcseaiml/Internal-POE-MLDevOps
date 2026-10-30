@@ -1,74 +1,102 @@
-# Internal POE - MLOps & DevOps Pipeline Assignment
+# MLOps & DevOps End-to-End Pipeline Assignment
 
-Comprehensive implementation of the 12-step MLOps/DevOps assignment for **hello.py**, VS Code project configuration, GitHub integration, Jenkins CI/CD automation, Docker containerization, Pytest unit testing, and Evidently AI monitoring.
+[![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.13-blue.svg)](https://www.python.org/)
+[![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD-red.svg)](https://www.jenkins.io/)
+[![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED.svg)](https://www.docker.com/)
+[![Pytest](https://img.shields.io/badge/Pytest-Unit%20Tested-0A9EDC.svg)](https://docs.pytest.org/)
+[![Evidently AI](https://img.shields.io/badge/Evidently%20AI-Monitoring-purple.svg)](https://www.evidentlyai.com/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Internal--POE--MLDevOps-success.svg)](https://github.com/pankajcseaiml/Internal-POE-MLDevOps)
 
-**Repository:** [https://github.com/pankajcseaiml/Internal-POE-MLDevOps](https://github.com/pankajcseaiml/Internal-POE-MLDevOps)
+An end-to-end beginner MLOps/DevOps project demonstrating modular application development (`hello.py`), VS Code workspace configuration, GitHub version control, Jenkins declarative CI/CD automation, Docker containerization with a lightweight base image, Pytest unit testing, and Evidently AI data drift and model quality monitoring.
+
+**GitHub Repository:** [https://github.com/pankajcseaiml/Internal-POE-MLDevOps](https://github.com/pankajcseaiml/Internal-POE-MLDevOps)
 
 ---
 
-## 📁 Project Structure
+## 📁 Clean Project Structure
 
 ```text
 Internal POE/
 ├── .vscode/
 │   ├── settings.json         # VS Code workspace settings & pytest test discovery
-│   └── launch.json           # VS Code debug and execution configurations
+│   └── launch.json           # VS Code debug & run configurations
 ├── tests/
 │   └── test_hello.py         # Pytest unit test case (Step 11)
-├── Dockerfile                # Lightweight Python Docker image configuration (Steps 9 & 10)
+├── Dockerfile                # Lightweight Python container image (Steps 9 & 10)
 ├── hello.py                  # Single-file core application (Step 2)
-├── evidently_monitor.py      # Evidently AI data drift and quality monitor (Step 12)
-├── Jenkinsfile               # Declarative Jenkins CI/CD pipeline (Steps 5, 6, 7)
-├── requirements.txt          # Python dependencies
-├── .gitignore                # Git ignore configuration
-└── README.md                 # Detailed step-by-step documentation
+├── evidently_monitor.py      # Evidently AI drift and quality monitoring (Step 12)
+├── Jenkinsfile               # Declarative Jenkins CI/CD automation (Steps 5, 6, 7)
+├── requirements.txt          # Production dependencies
+├── .gitignore                # Clean Git exclusion rules
+└── README.md                 # Complete documentation & execution guide
+```
+
+---
+
+## 🔄 Architecture & CI/CD Pipeline
+
+```
+┌─────────────┐       ┌──────────────┐       ┌─────────────────┐
+│  hello.py   │ ────> │  Git/GitHub  │ ────> │ Jenkins (CI/CD) │
+└─────────────┘       └──────────────┘       └────────┬────────┘
+                                                      │
+         ┌───────────────────┬────────────────────────┴─────────────────────┐
+         ▼                   ▼                                              ▼
+ ┌───────────────┐   ┌──────────────────────────────┐              ┌────────────────┐
+ │ Pytest Test   │   │ Evidently AI Data Monitoring │              │ Docker Build   │
+ │ (Unit verify) │   │ (Drift & Summary Dashboard)  │              │ & Run Container│
+ └───────────────┘   └──────────────────────────────┘              └────────────────┘
 ```
 
 ---
 
 ## 📋 Step-by-Step Assignment Walkthrough
 
-### Step 2: Very Simple Single File Application `hello.py`
-The application `hello.py` contains a modular function `get_message()` returning `"Hello MLOps"` and a `main()` function printing it.
-
+### Step 2: Very Simple Single-File Application (`hello.py`)
+Modular Python application returning and printing the expected message:
 ```python
 # hello.py
 def get_message() -> str:
+    """Return the welcome message."""
     return "Hello MLOps"
 
 def main():
+    """Print the welcome message for the project."""
     message = get_message()
     print(message)
 
 if __name__ == "__main__":
     main()
 ```
-**Execution:**
-```bash
+**Run in CMD:**
+```cmd
 python hello.py
-# Output: Hello MLOps
+```
+*Output:*
+```text
+Hello MLOps
 ```
 
 ---
 
-### Step 3: Create Project in VS Code Project
-1. Open the project folder in VS Code:
-   ```bash
-   code "C:\Users\Pankaj\Documents\Internal POE"
-   ```
-2. Configuration files created under `.vscode/`:
-   - `.vscode/settings.json`: Enables `pytest`, sets test directory to `tests`, and specifies the default Python interpreter.
-   - `.vscode/launch.json`: Provides 1-click debug/run configurations for `hello.py`, `pytest`, and `evidently_monitor.py`.
+### Step 3: Create Project in VS Code
+The workspace includes `.vscode` configurations:
+* [`.vscode/settings.json`](.vscode/settings.json): Enables `pytest` auto-discovery in `tests/`.
+* [`.vscode/launch.json`](.vscode/launch.json): 1-click debug/run configurations for `hello.py`, `pytest`, and `evidently_monitor.py`.
+
+**Run in CMD:**
+```cmd
+code .
+```
 
 ---
 
 ### Step 4: Push Project Structure to Git
-Initialize the local Git repository, configure the remote repository, and push to GitHub:
-
-```bash
-git init
+Initialize Git, track files, and push to GitHub:
+```cmd
+git status
 git add .
-git commit -m "feat: complete MLOps hello-pipeline project structure"
+git commit -m "feat: complete MLOps project pipeline structure"
 git branch -M main
 git remote add origin https://github.com/pankajcseaiml/Internal-POE-MLDevOps.git
 git push -u origin main
@@ -77,86 +105,99 @@ git push -u origin main
 ---
 
 ### Step 5: Install & Configure Jenkins
-1. Jenkins is installed on Windows at `C:\Program Files\Jenkins` and runs as a Windows Service (`Jenkins`).
-2. Jenkins web console is accessible at:
+1. Jenkins is installed locally on Windows and accessible at:
    ```text
    http://localhost:8081
    ```
-   *(Note: Port 8081 is configured because Port 8080 is used by Steam web helper on this machine).*
-3. Default Jenkins Home: `C:\ProgramData\Jenkins\.jenkins`
-4. Plugins configured:
-   - **Git Plugin** (`hudson.plugins.git.GitTool`)
-   - **Pipeline Plugin**
-   - **Windows Batch Plugin** (`hudson.tasks.BatchFile`)
+   *(Port `8081` is configured to avoid conflicts with Steam's web helper on port `8080`).*
+2. Jenkins plugins configured:
+   * **Git Plugin**
+   * **Pipeline Plugin**
+   * **Windows Batch Plugin**
+
+**Test Jenkins in CMD:**
+```cmd
+curl -I http://localhost:8081
+start http://localhost:8081
+```
 
 ---
 
 ### Step 6: Pull the Code from GitHub in Jenkins
-In Jenkins, configure a new Pipeline or Freestyle job:
-1. Open Jenkins Dashboard (`http://localhost:8081`).
-2. Click **New Item** -> Name: `Internal-POE-MLDevOps` -> Select **Pipeline** -> Click **OK**.
-3. Under **Pipeline** definition, select **Pipeline script from SCM**:
-   - **SCM**: Git
-   - **Repository URL**: `https://github.com/pankajcseaiml/Internal-POE-MLDevOps.git`
-   - **Branch Specifier**: `*/main`
-   - **Script Path**: `Jenkinsfile`
-4. Click **Save**.
+In the Jenkins Web UI:
+1. Click **New Item** ➔ Enter name `Internal-POE-MLDevOps` ➔ Select **Pipeline** ➔ Click **OK**.
+2. Scroll to the **Pipeline** section at the bottom:
+   * **Definition**: Select `Pipeline script from SCM`
+   * **SCM**: Select `Git`
+   * **Repository URL**: `https://github.com/pankajcseaiml/Internal-POE-MLDevOps.git`
+   * **Branch Specifier**: `*/main`
+   * **Script Path**: `Jenkinsfile`
+3. Click **Save**.
 
 ---
 
-### Step 7: Run Jenkins Job
-1. In the `Internal-POE-MLDevOps` project page, click **Build Now**.
-2. Click on the running build (e.g., `#1`) -> **Console Output**.
-3. The pipeline stages execute sequentially:
-   - Stage 1: Checkout Code from GitHub
-   - Stage 2: Install Dependencies from `requirements.txt`
-   - Stage 3: Run Pytest test suite
-   - Stage 4: Run Evidently AI Monitoring
-   - Stage 5: Build and Run Docker Container
-   - Post: Archive `evidently_report.html`
+### Step 7: Run Jenkins Pipeline
+1. On the `Internal-POE-MLDevOps` page, click **Build Now**.
+2. Click on the build number ➔ **Console Output**.
+3. All stages execute automatically:
+   * **Checkout Code:** Fetches latest commit from GitHub.
+   * **Install Dependencies:** Installs packages from `requirements.txt`.
+   * **Run Pytest:** Executes test suite with `-p no:dash`.
+   * **Evidently AI Monitoring:** Generates data drift report.
+   * **Docker Build and Run:** Builds and executes the container.
+   * **Post Action:** Archives `evidently_report.html` as a build artifact.
 
 ---
 
-### Step 8: Install Docker
-Docker Desktop for Windows is installed on the system:
-```powershell
+### Step 8: Install & Verify Docker
+Docker Desktop with the WSL 2 backend is installed on Windows:
+```cmd
 docker --version
-# Output: Docker version 29.8.2
+docker ps
 ```
-*Note: Make sure Docker Desktop is launched and running to enable the container daemon (`npipe:////./pipe/dockerDesktopLinuxEngine`).*
+*Output:*
+```text
+Docker version 29.8.2
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
 
 ---
 
 ### Step 9: Pull Lightweight Python Docker Image
-We use `python:3.11-slim`, which has minimal footprint (~50MB compressed) compared to the standard python image (>300MB):
-```bash
+Pulls `python:3.11-slim` (~50 MB compressed vs > 300 MB standard image):
+```cmd
 docker pull python:3.11-slim
 ```
 
 ---
 
-### Step 10: Add `hello.py` to Docker
-Defined in `Dockerfile`:
+### Step 10: Add `hello.py` to Docker (Build & Run Container)
+Defined in [`Dockerfile`](Dockerfile):
 ```dockerfile
 FROM python:3.11-slim
 WORKDIR /app
 COPY hello.py .
 CMD ["python", "hello.py"]
 ```
-**Build and Run Commands:**
-```bash
-# Build the Docker image
-docker build -t hello-mlops:latest .
 
-# Run the container
+**Build Image:**
+```cmd
+docker build -t hello-mlops:latest .
+```
+
+**Run Container:**
+```cmd
 docker run --rm hello-mlops:latest
-# Output: Hello MLOps
+```
+*Output:*
+```text
+Hello MLOps
 ```
 
 ---
 
 ### Step 11: Configure Pytest and Print 1 Test Case
-Pytest test file located at `tests/test_hello.py`:
+Test file located at [`tests/test_hello.py`](tests/test_hello.py):
 ```python
 from hello import get_message, main
 
@@ -171,11 +212,12 @@ def test_hello_mlops_message(capsys):
     print(f"[PYTEST OUTPUT] captured stdout from main(): '{captured.out.strip()}'")
     assert "Hello MLOps" in captured.out
 ```
-**Execution:**
-```bash
-python -m pytest -v -s tests/test_hello.py
+
+**Run in CMD:**
+```cmd
+python -m pytest -p no:dash -v -s tests/test_hello.py
 ```
-**Test Result Output:**
+*Output:*
 ```text
 tests/test_hello.py::test_hello_mlops_message 
 [PYTEST OUTPUT] get_message() returned: 'Hello MLOps'
@@ -186,17 +228,17 @@ PASSED [100%]
 
 ---
 
-### Step 12: Configuration Evidently Tool & Monitor
-Configured in `evidently_monitor.py` using Evidently AI:
-1. Generates reference (baseline) data and current (production) data with simulated distribution drift.
+### Step 12: Configure Evidently Tool & Monitor
+Configured in [`evidently_monitor.py`](evidently_monitor.py):
+1. Generates reference (baseline) and current (production) datasets with simulated drift on `feature_1`.
 2. Computes **Data Drift** and **Data Summary** metric presets.
-3. Exports an interactive HTML dashboard: `evidently_report.html`.
+3. Exports an interactive dashboard: `evidently_report.html`.
 
-**Execution:**
-```bash
+**Run in CMD:**
+```cmd
 python evidently_monitor.py
 ```
-**Output:**
+*Output:*
 ```text
 ==================================================
   Evidently AI Tool - Data & Model Monitoring     
@@ -208,5 +250,26 @@ python evidently_monitor.py
 [REPORT LOCATION] C:\Users\Pankaj\Documents\Internal POE\evidently_report.html
 ==================================================
 ```
-The resulting `evidently_report.html` can be opened directly in any browser for interactive visual inspection of feature drift and data quality metrics.
 
+**Open in Browser:**
+```cmd
+start evidently_report.html
+```
+
+---
+
+## 🛠️ Verification & Tech Stack
+
+| Step | Tool / Technology | Status | Output / Link |
+| :--- | :--- | :--- | :--- |
+| **2** | Python 3 | ✅ Verified | `Hello MLOps` |
+| **3** | VS Code | ✅ Configured | `.vscode/settings.json`, `.vscode/launch.json` |
+| **4** | Git / GitHub | ✅ Verified | [Internal-POE-MLDevOps](https://github.com/pankajcseaiml/Internal-POE-MLDevOps) |
+| **5** | Jenkins Service | ✅ Running | `http://localhost:8081` |
+| **6** | Jenkins SCM Pull | ✅ Verified | GitHub webhook / Git SCM polling |
+| **7** | Jenkins Pipeline | ✅ Verified | `Jenkinsfile` automated stages |
+| **8** | Docker Engine | ✅ Running | Docker Desktop (WSL 2) |
+| **9** | Docker Hub | ✅ Verified | `python:3.11-slim` |
+| **10** | Docker Container | ✅ Verified | `hello-mlops:latest` |
+| **11** | Pytest | ✅ Passed | 1/1 test passed (`test_hello.py`) |
+| **12** | Evidently AI | ✅ Generated | `evidently_report.html` interactive dashboard |
