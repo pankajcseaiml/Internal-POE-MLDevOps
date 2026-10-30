@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PYTHON_EXEC = 'python'
+        PATH = "C:\\Users\\Pankaj\\AppData\\Local\\Programs\\Python\\Python313;C:\\Users\\Pankaj\\AppData\\Local\\Programs\\Python\\Python313\\Scripts;${env.PATH}"
     }
 
     stages {
@@ -60,4 +60,3 @@ pipeline {
         }
     }
 }
-
