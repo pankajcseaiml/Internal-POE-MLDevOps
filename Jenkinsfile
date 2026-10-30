@@ -3,12 +3,13 @@ pipeline {
 
     environment {
         PATH = "C:\\Users\\Pankaj\\AppData\\Local\\Programs\\Python\\Python313;C:\\Users\\Pankaj\\AppData\\Local\\Programs\\Python\\Python313\\Scripts;${env.PATH}"
+        PYTHONPATH = "C:\\Users\\Pankaj\\AppData\\Roaming\\Python\\Python313\\site-packages"
     }
 
     stages {
         stage('Checkout Code') {
             steps {
-                echo 'Pulling code from GitHub repository: https://github.com/pankajcseaiml/Internal-POE-MLDevOps'
+                echo 'Pulling code from GitHub repository...'
                 checkout scm
             }
         }
@@ -23,7 +24,7 @@ pipeline {
         stage('Run Pytest') {
             steps {
                 echo 'Running Pytest test case for hello.py...'
-                bat 'python -m pytest -v -s tests/test_hello.py'
+                bat 'python -m pytest -p no:dash -v -s tests/test_hello.py'
             }
         }
 
@@ -54,9 +55,6 @@ pipeline {
         }
         success {
             echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline encountered failures.'
         }
     }
 }
